@@ -6,7 +6,6 @@ import cookies from 'js-cookie';
 import queryString from 'query-string';
 import onfire from 'onfire.js';
 import helper from './core/helper';
-// import prompt from './core/prompt';
 import Socket from './core/Socket';
 import auth from './core/auth';
 import { contextTypes, propTypes } from './core/decorator';

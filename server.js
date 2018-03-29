@@ -7,7 +7,7 @@ const config = require('./build/webpack.config');
 const tool = require('./scripts/tool');
 const host = tool.getLocalIP() || '0.0.0.0';
 // const host = '0.0.0.0';
-const port = 8000;        // 端口号
+const port = 8100;        // 端口号
 const mockHost = 'http://localhost:3000';	// mock服务主机+端口
 
 // webpack 自动重新加载，采用inline

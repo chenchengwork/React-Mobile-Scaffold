@@ -1,31 +1,9 @@
 /**
  * Created by chencheng on 2017/6/16.
  */
-// import moment from 'moment';
 import _ from 'lodash';
-import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
 
 class Helper {
-
-    /**
-	 * 渲染弹出窗Modal
-     * @param component //reactElement react组件
-     */
-	renderModal(component) {
-		const domId = 'tj-render-dom';
-
-		if ($('#' + domId).length < 1) {
-            $('<div />', {
-                id: domId,
-            }).appendTo('body');
-        }
-
-        const domObject = document.querySelector('#' + domId);
-
-		unmountComponentAtNode(domObject);
-
-        reactDomRender(component, domObject);
-	}
 
     /**
      * 模拟request api数据
