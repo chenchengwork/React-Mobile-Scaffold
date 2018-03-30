@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import T from 'utils/T';
 
-// import { Spin } from 'antd';
+import { ActivityIndicator, Flex } from 'antd-mobile';
 import { PureComponent as ReactComponent } from 'react';
 import { STORE_INJECT } from 'store.js';
 
@@ -57,8 +57,6 @@ export default class LazyLoadTpl extends ReactComponent {
         }
 
         // 默认显示加载动画
-        // return <Spin size="large" wrapperClassName="page-loading" />;
-        return "loading";
-
+        return <Flex justify="end"><ActivityIndicator size="large" /></Flex>
     }
 }

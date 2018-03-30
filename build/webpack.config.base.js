@@ -118,7 +118,7 @@ const getModuleRules = () => {
             use: 'file-loader'
         },
         {
-            test: /\.(txt|doc|docx|swf)$/,
+            test: /\.(txt|doc|docx|swf|md)$/,
             use: 'file-loader?name=[path][name].[ext]'
         },
         {

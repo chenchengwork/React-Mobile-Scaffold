@@ -3,13 +3,14 @@
  * @author vision <vision.shi@tianjishuju.com>
  * @license www.tianjishuju.com/license
  */
+import "antd-mobile/es/toast/style/index.css";
+import "antd-mobile/es/modal/style/index.css";
+
+
 import { LocaleProvider } from 'antd-mobile';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider, injectIntl } from 'react-intl';
-
-// 加载基础样式
-import './base.scss';
 
 // 加载 redux store
 import store from './store';

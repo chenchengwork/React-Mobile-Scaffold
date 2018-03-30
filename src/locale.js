@@ -1,7 +1,8 @@
 /**
  * Created by chencheng on 16-7-12.
  */
-import T from './utils/T';
+// import T from './utils/T';
+import cookies from 'js-cookie'
 import { addLocaleData } from 'react-intl';
 
 import enUS from 'antd-mobile/lib/locale-provider/en_US';
@@ -16,7 +17,7 @@ export function getLocale() {
     let locale = 'zh';
     let langType = 'zh-CN';
 
-    let lang = T.cookies.get('tj_langKey');
+    let lang = cookies.get('tj_langKey');
     if (lang) {
         langType = lang === 'zh' ? 'zh-CN' : 'en';
     }

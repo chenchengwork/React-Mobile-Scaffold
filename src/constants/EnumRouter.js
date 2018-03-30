@@ -13,19 +13,12 @@ const EnumRouter = {
 
     /*
      |-----------------------------------------------
-     | 数据采集-相关的路由
+     | 运营数据-相关的路由
      |-----------------------------------------------
      */
-    dHub_pluginManage: 'dataHub/pluginManage',
-    dHub_hostMonitor: 'dataHub/resourceMonitor/host',
-    dHub_pluginMonitor: 'dataHub/resourceMonitor/plugin',
+    operateD_run: 'operationalData/run',
 
-    /*
-     |-----------------------------------------------
-     | 数据可视化-相关的路由
-     |-----------------------------------------------
-     */
-    dVisual_bigScreen: 'dataVisual/bigScreen',
+
 };
 
 
