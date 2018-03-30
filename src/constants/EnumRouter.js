@@ -17,6 +17,14 @@ const EnumRouter = {
      |-----------------------------------------------
      */
     operateD_run: 'operationalData/run',
+    operateD_delay: 'operationalData/delay',
+
+    /*
+     |-----------------------------------------------
+     | 指标分析-相关的路由
+     |-----------------------------------------------
+     */
+    IndexAnalysis_test: 'indexAnalysis/test',
 
 
 };

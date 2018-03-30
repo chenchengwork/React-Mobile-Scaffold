@@ -38,64 +38,62 @@ export const EnumIconTypes = {
  */
 export const EnumDefaultMenus = [
     {
-        label: '数据平台',
-        value: 'dataPlatform',
-        childrenMenu: [
+        label: '运营数据',
+        icon: <div style={{
+            width: '22px',
+            height: '22px',
+            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
+        />,
+        selectedIcon: <div style={{
+            width: '22px',
+            height: '22px',
+            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
+        />,
+
+        children: [
             {
-                label: '数据采集',
+                label: '运行',
                 icon: {
-                    appType: EnumIconTypes.custom,
-                    iconType:'caiji'
+                    appType: EnumIconTypes.antd,
+                    iconType:'switcher'
                 },
-                children: [
-                    {
-                        label: '插件管理',
-                        icon: {
-                            appType: EnumIconTypes.antd,
-                            iconType:'switcher'
-                        },
-                        url: EnumRouter.dHub_pluginManage,
-                        children: []
-                    },
-                    {
-                        label: '资源监控',
-                        icon: {
-                            appType: EnumIconTypes.antd,
-                            iconType:'hdd'
-                        },
-                        children: [
-                            {
-                                label: '主机监控',
-                                url: EnumRouter.dHub_hostMonitor,
-                                children: []
-                            },
-                            {
-                                label: '插件监控',
-                                url: EnumRouter.dHub_pluginMonitor,
-                                children: []
-                            }
-                        ]
-                    }
-                ]
+                url: EnumRouter.operateD_run,
+                children: []
+            },
+            {
+                label: '延误',
+                icon: {
+                    appType: EnumIconTypes.antd,
+                    iconType:'switcher'
+                },
+                url: EnumRouter.operateD_delay,
+                children: []
             },
         ]
     },
     {
-        label: '数据应用',
-        value: 'dataApp',
-        childrenMenu: [
+        label: '指标分析',
+        icon: <div style={{
+            width: '22px',
+            height: '22px',
+            background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
+        />,
+        selectedIcon: <div style={{
+            width: '22px',
+            height: '22px',
+            background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
+        />,
+        children: [
             {
-                label: '数据可视化',
-                children: [
-                    {
-                        label: '作品集',
-                        icon: 'pie-chart',
-                        url: EnumRouter.dVisual_bigScreen,
-                        children: []
-                    }
-                ]
+                label: 'TEST',
+                icon: {
+                    appType: EnumIconTypes.antd,
+                    iconType:'switcher'
+                },
+                url: EnumRouter.IndexAnalysis_test,
+                children: []
             },
         ]
-    }
+    },
 ];
 

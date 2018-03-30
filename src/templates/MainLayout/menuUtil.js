@@ -4,9 +4,6 @@
 import T from 'utils/T';
 import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from 'constants/EnumDefaultMenus';
 
-// --图片资源--
-import LogoutIcon from './img/logout.svg';
-
 /**
  * url和分类值的对应关系
  * @type {{}}
@@ -16,26 +13,23 @@ export const UrlToExtraInfoMap = {};
 /**
  * 配置菜单文件
  */
-const EnumMenus = (() => {
+export const EnumMenus = (() => {
 
     /**
      * 获取url对应额外信息的Item
-     * @param category
      * @param url
      */
-    const getUrlToExtraInfoMapItem = (category, url) => ({
-        category,
+    const getUrlToExtraInfoMapItem =(url) => ({
         isCollapsedLeftMenu: EnumCollapsedLeftMenuUrls.indexOf(url) !== -1
     });
 
     /**
      * 格式化菜单
-     * @param category
      * @param menus
      * @param urls
      * @returns {{menus: *, urls: Array}}
      */
-    const formatMenus = (category, menus, urls = []) => {
+    const formatMenus = (menus, urls = []) => {
         menus.forEach(menu => {
             if (T.lodash.isUndefined(menu.children)) menu.children = [];
 
@@ -54,113 +48,24 @@ const EnumMenus = (() => {
                     menu.url = [];
                 }
 
-                const result = formatMenus(category, menu.children);
+                const result = formatMenus(menu.children);
 
                 menu.url = T.lodash.uniq(menu.url.concat(result.urls));
                 urls = T.lodash.uniq(urls.concat(menu.url));
             }
         });
 
-        urls.forEach(url => UrlToExtraInfoMap[url] = getUrlToExtraInfoMapItem(category, url));
+        urls.forEach(url => UrlToExtraInfoMap[url] = getUrlToExtraInfoMapItem( url));
 
         return { menus, urls };
     }
 
     // 加工默认菜单配置
-    EnumDefaultMenus.forEach((appMenus) => appMenus.childrenMenu = formatMenus(appMenus.value, appMenus.childrenMenu).menus);
-
-    return EnumDefaultMenus;
+    const menus = formatMenus(EnumDefaultMenus).menus;
+    console.log(menus);
+    return menus;
 })();
 
-
-/**
- * 枚举碎片
- * @type {[*]}
- */
-export const EnumFragmentMenu = [
-    {
-        label: '退出',
-        url: '',
-        icon: LogoutIcon,
-        children: []
-    }
-];
-
-/**
- * 是否移除左侧菜单
- * @param url
- * @return {boolean}
- */
-export const isRemoveLeftMenu = (url) => {
-    for (let i = 0; i < EnumDefaultMenus.length; i++){
-        const childrenMenu = EnumDefaultMenus[i].childrenMenu;
-        for (let j = 0; j < childrenMenu.length; j++) {
-            const menu = childrenMenu[j];
-            let isCheck = false;
-
-            if (menu.url){
-                if (Array.isArray(menu.url) && menu.url.indexOf(url) !== -1){
-                    isCheck = true;
-                } else if(T.lodash.isString(menu.url) && menu.url == url) {
-                    isCheck = true;
-                }
-            }
-
-            if (isCheck){
-                if (!menu.children || menu.children.length < 1) {
-                    return true;
-                }else {
-                    return false;
-                }
-            }
-        }
-    }
-
-    return false;
-};
-
-/**
- * 获取菜单分类的label
- * @param category
- * @returns {*}
- */
-export const getMenuCategoryLabel = (category) => {
-
-    for (let i = 0; i < EnumMenus.length; i++) {
-        if (category === EnumMenus[i].value) {
-            return EnumMenus[i].label;
-        }
-    }
-
-    return null;
-};
-
-/**
- * 获取菜单类别
- */
-export const getMenuCategory = () => EnumMenus.map((val) => {
-    const { label, value } = val;
-    return {
-        label,
-        value,
-        url: val.childrenMenu[0]['url'][0]
-    };
-});
-
-/**
- * 获取菜单的类别
- * @param {String} category
- * @returns {Array}
- */
-export const getMenusByCategory = (category) => {
-	for (let i = 0; i < EnumMenus.length; i++) {
-		if (category === EnumMenus[i].value) {
-			return EnumMenus[i].childrenMenu;
-		}
-	}
-
-	return [];
-};
 
 
 /**
