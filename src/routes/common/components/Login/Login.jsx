@@ -2,13 +2,10 @@ import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 import {  Drawer, List, NavBar, Icon } from 'antd-mobile';
 
-import EnumRouter from 'constants/EnumRouter';
 import './Login.scss';
-// import T from 'utils/T';
+import T from 'utils/T';
 // import { doLoginAction } from '../../actions/login';
 
-// const logo = require('./img/logo2.png');
-// const rightLoginImg = require('./img/right_login.png');
 
 export default class Login extends PureComponent {
 	state = {
@@ -20,7 +17,7 @@ export default class Login extends PureComponent {
 	}
 
     render() {
-
+		console.log(T.request)
 		const sidebar = (<List>
 			{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i, index) => {
 				if (index === 0) {
