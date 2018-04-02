@@ -4,15 +4,13 @@ import T from 'utils/T';
 import CustomIcon from 'templates/ToolComponents/CustomIcon';
 
 import { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 
-import { TabBar, Tabs, WhiteSpace } from 'antd-mobile';
+import { TabBar, Tabs } from 'antd-mobile';
 import { EnumIconTypes } from 'constants/EnumDefaultMenus';
 
 
 import {
     UrlToExtraInfoMap,
-    getLeftMenu,
     EnumMenus
 } from './menuUtil';
 
@@ -161,12 +159,12 @@ export default class MainLayout extends PureComponent {
                     {
                         EnumMenus.map((item, idx) => (
                             <TabBar.Item
-                                title="Life"
+                                title={item.label}
                                 key={idx}
                                 icon={item.icon}
                                 selectedIcon={item.selectedIcon}
                                 selected={item.url.indexOf(currentUrl) !== -1}
-                                badge={1}
+                                // badge={1}
                                 onPress={() => this.context.router.history.push(item.url[0])}
                             >
                                 {this.renderContent(this.props.children, item.children)}
