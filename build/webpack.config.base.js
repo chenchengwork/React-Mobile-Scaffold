@@ -71,8 +71,6 @@ const formatStyleLoader = (otherLoader = null) => {
                 options: {
                     sourceMap: true,
                     modules: true,
-                    import: false,
-                    url: false,
                     localIdentName: '[name]__[local]__[hash:base64:5]'
                 }
             }
