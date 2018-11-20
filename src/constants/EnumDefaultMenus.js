@@ -18,13 +18,14 @@ export const EnumIconTypes = {
     custom: 'custom'
 };
 
+
 /**
  * 菜单配置
  *
  * Usage:
  * 左侧菜单参数使用说明:
  * {
-        label:"ETL应用",
+        label:"Apex应用",
 
         //antd中的icon type
         icon:"swap",
@@ -38,62 +39,23 @@ export const EnumIconTypes = {
  */
 export const EnumDefaultMenus = [
     {
-        label: '运营数据',
-        icon: <div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-        />,
-        selectedIcon: <div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-        />,
-
-        children: [
+        label: '数据平台',
+        value: 'dataPlatform',
+        childrenMenu: [
             {
-                label: '运行',
+                // label: '可视化组件',
                 icon: {
-                    appType: EnumIconTypes.antd,
-                    iconType:'switcher'
+                    appType: EnumIconTypes.custom,
+                    iconType: 'zujian1'
                 },
-                url: EnumRouter.operateD_run,
-                children: []
-            },
-            {
-                label: '延误',
-                icon: {
-                    appType: EnumIconTypes.antd,
-                    iconType:'switcher'
-                },
-                url: EnumRouter.operateD_delay,
-                children: []
+                children: [
+                    {
+                        label: "我的可视化",
+                        url: EnumRouter.screen,
+                    },
+                ]
             },
         ]
-    },
-    {
-        label: '指标分析',
-        icon: <div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-        />,
-        selectedIcon: <div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-        />,
-        children: [
-            {
-                label: 'TEST',
-                icon: {
-                    appType: EnumIconTypes.antd,
-                    iconType:'switcher'
-                },
-                url: EnumRouter.IndexAnalysis_test,
-                children: []
-            },
-        ]
-    },
+    }
 ];
 

@@ -1,41 +1,19 @@
 /**
- * Created by chencheng on 2017/6/10.
+ * 配置文件
+ * @type {{apiDomain}}
  */
-
-window.ENV = (function () {
-    var rootPath = '/';     // 路由的根路径
+var ENV = (function () {
+    var apiDomain = "http://localhost:7101";
+    var rootPath = "/";
 
     return {
-        apiDomain: 'http://localhost:8360',         // api请求接口   测试服务器
-        rootPath: rootPath,                       	// 路由的根路径
-        apiSuccessCode: 0,                          // api响应成功的code
-
+        rootPath: rootPath,                                 // 根路由前缀
+        apiDomain: apiDomain,
         login: {
-            errorCode: 900,                                 // 未登录的error code
-            isCheckLogin: false,                            // web端是否验证登录
-            cookieKey: '__login_user_info__',               // 登录成功的cookie key, 用于验证当前页面是否登录
-            defaultRedirectUrl: rootPath + 'login',  // 登录成功默认重定向的url
-            loginUrl: rootPath + 'login',                   // 登录页面url
-
-            // 不需要验证是否登录的路由配置
-            noCheckIsLoginRoutes: [
-                rootPath + 'login',
-            ]
-        },
-
-        socket: {
-            etl: {
-                isStart: true,                          // 是否开启etl websocket服务
-                domain: 'ws://10.0.3.179:9091',         // etl websocket domain地址
-                opts: {
-                    path: '/pubsub',
-                }
-            }
-        },
-
-        mock: {
-            apiDomain: 'http://localhost:8180',     // mockApi请求接口
-            isStart: false,                         // 是否开启mock
-        },
+            isStartLoginCheck: false,                        // 是否开启登录验证
+            cookieKey: "vis_sess",                          // 登录验证的cookie
+            defaultRedirectUrl: rootPath + "index",        // 默认跳转页面
+            loginUrl: rootPath + "login",                   // 登录页面路由
+        }
     }
 })();

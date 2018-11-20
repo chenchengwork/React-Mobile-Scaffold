@@ -1,23 +1,22 @@
-/**
- * Created by chencheng on 2017/6/16.
- */
+import EnumEnv from 'constants/EnumEnv';
+const apiPrefix = EnumEnv.apiPrefix || '/';
 
-const _processAPI = (api) => {
-	if (window.ENV.mock.isStart) {
-		return '/mockAPI' + api;
-	}
-
-	return api;
-};
+const proxyAPI = (api) => apiPrefix.replace(/\/$/, "") + "/" + api.replace(/^\//, "");
 
 
-/**
- *
- * @type {{login}}
- */
-const EnumAPI = {
+export default {
+    login: proxyAPI("login"),                   // 登录
+    logout: proxyAPI("logout"),                 // 退出
+    register: proxyAPI("register"),             // 注册
 
-	login: _processAPI('/p/login'),
-};
-
-export default EnumAPI;
+    /**
+     * 业务A相关的API
+     */
+    screen: {
+        getItem: proxyAPI("/screen/getScreen"),
+        getPageList: proxyAPI("/screen/getPageList"),
+        createItem: proxyAPI("/screen/createScreen"),
+        updateItem: (screen_id) => proxyAPI(`/screen/updateScreen?screen_id=${screen_id}`),
+        deleteItem: proxyAPI("/screen/deleteScreen")
+    },
+}
