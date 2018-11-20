@@ -180,7 +180,7 @@ const mainLayoutProps = {
             badge: "",
             dot: false,
             onPress: () => {},
-            content: <div>1111</div>
+            component: () => <div>1111</div>
         },
         {
             title: "Koubei",
@@ -190,7 +190,7 @@ const mainLayoutProps = {
             badge: "new",
             dot: false,
             onPress: () => {},
-            content: <div>2222</div>
+            component: () => <div>2222</div>
         },
         {
             title: "Friend",
@@ -200,7 +200,7 @@ const mainLayoutProps = {
             badge: "new",
             dot: false,
             onPress: () => {},
-            content: <div>3333</div>
+            component: () => <div>3333</div>
         },
         {
             title: "My",
@@ -210,7 +210,7 @@ const mainLayoutProps = {
             badge: "new",
             dot: false,
             onPress: () => {},
-            content: <div>4444</div>
+            component: () => <div>4444</div>
         },
     ],
 }

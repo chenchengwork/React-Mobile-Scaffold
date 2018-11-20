@@ -43,7 +43,7 @@ export default class MainLayout extends PureComponent {
     };
 
     state = {
-        selectedTab: Array.isArray(this.props.items) && this.props.items.length > 0 ? this.props.items[0].key : null,
+        selectedTab: Array.isArray(this.props.items) && this.props.items.length > 0 ? this.props.items[0].value : null,
         hidden: false,
     };
 
@@ -58,7 +58,7 @@ export default class MainLayout extends PureComponent {
             <div style={shallowCopy(defaultStyle, style)}>
                 <TabBar {...shallowCopy(defaultTabBarProps, tabBarProps)}>
                     {
-                        (Array.isArray(items) ? items : []).map(item => (
+                        (Array.isArray(items) ? items : []).map(({component: Vcomponent, ...item}) => (
                             <TabBar.Item
                                 key={item.value}
                                 title={item.title}
@@ -67,7 +67,7 @@ export default class MainLayout extends PureComponent {
                                 selected={selectedTab === item.value}
                                 onPress={() => this.setState({selectedTab: item.value})}
                             >
-                                {item.content}
+                                {selectedTab === item.value ? <Vcomponent />: null }
                             </TabBar.Item>
                         ))
                     }
