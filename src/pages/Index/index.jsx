@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import { Table, Button } from 'antd';
-import { TabBar, ListView } from 'antd-mobile';
+import { ListView } from 'antd-mobile';
+import MainLayout from 'layouts/MainLayout';
 
 export default class Screen extends Component{
 
@@ -12,9 +12,6 @@ export default class Screen extends Component{
         )
     }
 }
-
-
-
 
 
 
@@ -173,141 +170,55 @@ class ListViewExample extends React.Component {
     }
 }
 
-class TabBarExample extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedTab: 'blueTab',
-            hidden: false,
-        };
-    }
+const mainLayoutProps = {
+    items: [
+        {
+            title: "Life",
+            value: "Life",
+            icon: "https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg",
+            selectedIcon: "https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg",
+            badge: "",
+            dot: false,
+            onPress: () => {},
+            content: <div>1111</div>
+        },
+        {
+            title: "Koubei",
+            value: "Koubei",
+            icon: "https://zos.alipayobjects.com/rmsportal/BTSsmHkPsQSPTktcXyTV.svg",
+            selectedIcon: "https://zos.alipayobjects.com/rmsportal/ekLecvKBnRazVLXbWOnE.svg",
+            badge: "new",
+            dot: false,
+            onPress: () => {},
+            content: <div>2222</div>
+        },
+        {
+            title: "Friend",
+            value: "Friend",
+            icon: "https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg",
+            selectedIcon: "https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg",
+            badge: "new",
+            dot: false,
+            onPress: () => {},
+            content: <div>3333</div>
+        },
+        {
+            title: "My",
+            value: "My",
+            icon: "https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg",
+            selectedIcon: "https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg",
+            badge: "new",
+            dot: false,
+            onPress: () => {},
+            content: <div>4444</div>
+        },
+    ],
+}
 
-    renderContent(pageText) {
-        return (
-            <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-                <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
-                <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
-                   onClick={(e) => {
-                       e.preventDefault();
-                       this.setState({
-                           hidden: !this.state.hidden,
-                       });
-                   }}
-                >
-                    Click to show/hide tab-bar
-                </a>
-            </div>
-        );
-    }
+class TabBarExample extends React.Component {
 
     render() {
-        return (
-            <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
-                <TabBar
-                    unselectedTintColor="#949494"
-                    tintColor="#33A3F4"
-                    barTintColor="white"
-                    tabBarPosition="bottom"
-                    hidden={this.state.hidden}
-                    prerenderingSiblingsNumber={0}
-                >
-                    <TabBar.Item
-                        title="Life"
-                        key="Life"
-                        icon={<div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-                        />
-                        }
-                        selectedIcon={<div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-                        />
-                        }
-                        selected={this.state.selectedTab === 'blueTab'}
-                        badge={1}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'blueTab',
-                            });
-                        }}
-                        data-seed="logId"
-                    >
-                        <ListViewExample />
-                    </TabBar.Item>
-                    <TabBar.Item
-                        icon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-                            />
-                        }
-                        selectedIcon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-                            />
-                        }
-                        title="Koubei"
-                        key="Koubei"
-                        badge={'new'}
-                        selected={this.state.selectedTab === 'redTab'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'redTab',
-                            });
-                        }}
-                        data-seed="logId1"
-                    >
-                        {this.renderContent('Koubei')}
-                    </TabBar.Item>
-                    <TabBar.Item
-                        icon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
-                            />
-                        }
-                        selectedIcon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
-                            />
-                        }
-                        title="Friend"
-                        key="Friend"
-                        dot
-                        selected={this.state.selectedTab === 'greenTab'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'greenTab',
-                            });
-                        }}
-                    >
-                        {this.renderContent('Friend')}
-                    </TabBar.Item>
-                    <TabBar.Item
-                        icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-                        selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-                        title="My"
-                        key="my"
-                        selected={this.state.selectedTab === 'yellowTab'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'yellowTab',
-                            });
-                        }}
-                    >
-                        {this.renderContent('My')}
-                    </TabBar.Item>
-                </TabBar>
-            </div>
-        );
+
+        return <MainLayout {...mainLayoutProps}/>
     }
 }
