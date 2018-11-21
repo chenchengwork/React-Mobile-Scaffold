@@ -137,13 +137,11 @@ module.exports = (pipeNodes = []) => {
         pipe.staticResource,
         pipe.css,
         pipe.scss,
-        // pipe.babelAntd,
         antdMobile,
         pipe.babelReact,
 
         pipe.miniCssExtractPlugin,
         pipe.provideReactPlugin,
-        // pipe.autoDllReactPlugin,
         pipe.webpackbarPlugin,
 
         resolve,

@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Tabs, WhiteSpace } from 'antd-mobile';
+import { First } from './tabs';
 
 const tabs = [
     {
         title: '1st Tab',
-        Content: () => <div>1</div>
+        Content: First
     },
     {
         title: '2nd Tab',
@@ -20,6 +21,7 @@ const tabs = [
     },
 ];
 
+
 export default class Index extends Component{
     state = {
         currentPage: 0,
@@ -31,7 +33,9 @@ export default class Index extends Component{
     }
 
     resize = () => {
-        this.setState({containerHeight: window.innerHeight - 50 - 9*2})
+        // 50: 是底部占用的高度
+        // 9: 头部留白占用的高度
+        this.setState({containerHeight: window.innerHeight - 50 - 9})
     };
 
     renderContent = (tab, index) =>{
@@ -66,7 +70,6 @@ export default class Index extends Component{
                 >
                     {this.renderContent}
                 </Tabs>
-                <WhiteSpace />
             </div>
         );
     }
