@@ -47,7 +47,7 @@ const formatStyleLoader = (otherLoader = null) => {
         {
             loader: 'postcss-loader',
             options: {
-                sourceMap: true,
+                sourceMap: process.env.NODE_ENV === "production" ? false : true,
                 ident: 'postcss', 	// https://webpack.js.org/guides/migrating/#complex-options
                 plugins: () => [
                     require('postcss-flexbugs-fixes'),
@@ -71,7 +71,7 @@ const formatStyleLoader = (otherLoader = null) => {
             baseLoaders[0] = {
                 loader: 'css-loader',
                 options: {
-                    sourceMap: true,
+                    sourceMap: process.env.NODE_ENV === "production" ? false : true,
                     modules: true,
                     localIdentName: '[name]__[local]__[hash:base64:5]'
                 }
