@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TabBar } from 'antd-mobile';
+import css from "./index.scss";
+
+import { EnumMainLayoutMenus } from "constants/EnumDefaultMenus";
+import { decorator } from 'utils/T';
 
 const isFunction = (data) => typeof data === 'function';
 const shallowCopy = (a, b) => Object.assign({}, a, b);
-
 
 /**
  * 获取icon
@@ -13,63 +16,43 @@ const shallowCopy = (a, b) => Object.assign({}, a, b);
  */
 const getIcon = (icon) => isFunction(icon) ? icon : {uri: icon};
 
-const defaultStyle = {
-    position: 'fixed',
-    height: '100%',
-    width: '100%',
-    top: 0
-};
+const { style, tabBarProps, items } = EnumMainLayoutMenus;
 
-const defaultTabBarProps = {
-    unselectedTintColor: "#949494",
-    tintColor: "#33A3F4",
-    barTintColor: "white",
-    tabBarPosition: "bottom",
-    hidden: false,
-    prerenderingSiblingsNumber: 0
-};
-
+@decorator.contextTypes("router")
 export default class MainLayout extends PureComponent {
     static propTypes = {
-        items: PropTypes.array.isRequired,
-        tabBarProps: PropTypes.object,
-        style: PropTypes.object
+        currentUri: PropTypes.string.isRequired,
     };
 
-    static defaultProps = {
-        style: defaultStyle,
-        tabBarProps: defaultTabBarProps,
-        items: [],
-    };
-
-    state = {
-        selectedTab: Array.isArray(this.props.items) && this.props.items.length > 0 ? this.props.items[0].value : null,
-        hidden: false,
+    handlePress = (uri) => {
+        this.context.router.history.push(uri);   // 支持回退
+        // this.context.router.history.replace(uri);   // 不支持回退
     };
 
     render() {
-        const { selectedTab } = this.state;
-        let { style, tabBarProps, items } = this.props;
-
-        style = style || {};
-        tabBarProps = tabBarProps || {};
+        const { currentUri, children } = this.props;
 
         return (
-            <div style={shallowCopy(defaultStyle, style)}>
-                <TabBar {...shallowCopy(defaultTabBarProps, tabBarProps)}>
+            <div className={css["main-layout"]} style={style}>
+                <TabBar {...tabBarProps}>
                     {
-                        (Array.isArray(items) ? items : []).map(({component: Vcomponent, ...item}) => (
-                            <TabBar.Item
-                                key={item.value}
-                                title={item.title}
-                                icon={getIcon(item.icon)}
-                                selectedIcon={getIcon(item.selectedIcon)}
-                                selected={selectedTab === item.value}
-                                onPress={() => this.setState({selectedTab: item.value})}
-                            >
-                                {selectedTab === item.value ? <Vcomponent />: null }
-                            </TabBar.Item>
-                        ))
+                        (Array.isArray(items) ? items : []).map((item) => {
+                            const { uri, props } = item;
+                            const selected = currentUri === uri;
+
+                            return (
+                                <TabBar.Item
+                                    {...props}
+                                    key={uri}
+                                    icon={getIcon(props.icon)}
+                                    selectedIcon={getIcon(props.selectedIcon)}
+                                    selected={selected}
+                                    onPress={() => this.handlePress(uri)}
+                                >
+                                    {selected ? children: null }
+                                </TabBar.Item>
+                            )
+                        })
                     }
                 </TabBar>
             </div>
@@ -77,19 +60,3 @@ export default class MainLayout extends PureComponent {
     }
 }
 
-
-//<TabBarItem key={item.value} selectedTab={selectedTab} {...item}/>
-
-const TabBarItem = ({value, title, icon, selectedIcon, content, selectedTab}) => {
-    return (
-        <TabBar.Item
-            title={title}
-            icon={getIcon(icon)}
-            selectedIcon={getIcon(selectedIcon)}
-            selected={selectedTab === value}
-            onPress={() => this.setState({selectedTab: value})}
-        >
-            {content}
-        </TabBar.Item>
-    )
-}

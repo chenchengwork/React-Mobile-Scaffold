@@ -18,6 +18,10 @@ const routes = [
         uri: EnumRouter.index,
         component: import("./pages/Index"),
     },
+    {
+        uri: EnumRouter.index1,
+        component: import("./pages/Index1"),
+    },
 ];
 
 

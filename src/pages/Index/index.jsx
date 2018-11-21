@@ -1,224 +1,74 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { ListView } from 'antd-mobile';
-import MainLayout from 'layouts/MainLayout';
+import React, { Component, Fragment } from 'react';
+import { Tabs, WhiteSpace } from 'antd-mobile';
 
-export default class Screen extends Component{
-
-    render(){
-
-        return (
-            <TabBarExample />
-        )
-    }
-}
-
-
-
-const data = [
+const tabs = [
     {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        title: 'Meet hotel',
-        des: '不是所有的兼职汪都需要风吹日晒',
+        title: '1st Tab',
+        Content: () => <div>1</div>
     },
     {
-        img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
-        title: 'McDonald\'s invites you',
-        des: '不是所有的兼职汪都需要风吹日晒',
+        title: '2nd Tab',
+        Content: () => <div>2</div>
     },
     {
-        img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-        title: 'Eat the week',
-        des: '不是所有的兼职汪都需要风吹日晒',
+        title: '3rd Tab',
+        Content: () => <div>3</div>
+    },
+    {
+        title: '4th Tab',
+        Content: () => <div>4</div>
     },
 ];
-const NUM_SECTIONS = 5;
-const NUM_ROWS_PER_SECTION = 5;
-let pageIndex = 0;
 
-const dataBlobs = {};
-let sectionIDs = [];
-let rowIDs = [];
-function genData(pIndex = 0) {
-    for (let i = 0; i < NUM_SECTIONS; i++) {
-        const ii = (pIndex * NUM_SECTIONS) + i;
-        const sectionName = `Section ${ii}`;
-        sectionIDs.push(sectionName);
-        dataBlobs[sectionName] = sectionName;
-        rowIDs[ii] = [];
+export default class Index extends Component{
+    state = {
+        currentPage: 0,
+        containerHeight: 0
+    };
 
-        for (let jj = 0; jj < NUM_ROWS_PER_SECTION; jj++) {
-            const rowName = `S${ii}, R${jj}`;
-            rowIDs[ii].push(rowName);
-            dataBlobs[rowName] = rowName;
-        }
-    }
-    sectionIDs = [...sectionIDs];
-    rowIDs = [...rowIDs];
-}
-
-class ListViewExample extends React.Component {
-    constructor(props) {
-        super(props);
-        const getSectionData = (dataBlob, sectionID) => dataBlob[sectionID];
-        const getRowData = (dataBlob, sectionID, rowID) => dataBlob[rowID];
-
-        const dataSource = new ListView.DataSource({
-            getRowData,
-            getSectionHeaderData: getSectionData,
-            rowHasChanged: (row1, row2) => row1 !== row2,
-            sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-        });
-
-        this.state = {
-            dataSource,
-            isLoading: true,
-            height: (document.documentElement.clientHeight * 3) / 4,
-        };
+    componentDidMount(){
+        this.resize();
     }
 
-    componentDidMount() {
-        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop;
-        setTimeout(() => {
-            genData();
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlobs, sectionIDs, rowIDs),
-                isLoading: false,
-                height: hei,
-            });
-        }, 600);
-    }
+    resize = () => {
+        this.setState({containerHeight: window.innerHeight - 50 - 9*2})
+    };
 
-    onEndReached = (event) => {
-        if (this.state.isLoading && !this.state.hasMore) {
-            return;
-        }
-        console.log('reach end', event);
-        this.setState({ isLoading: true });
-        setTimeout(() => {
-            genData(++pageIndex);
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlobs, sectionIDs, rowIDs),
-                isLoading: false,
-            });
-        }, 1000);
-    }
-
-    render() {
-        const separator = (sectionID, rowID) => (
-            <div
-                key={`${sectionID}-${rowID}`}
-                style={{
-                    backgroundColor: '#F5F5F9',
-                    height: 8,
-                    borderTop: '1px solid #ECECED',
-                    borderBottom: '1px solid #ECECED',
-                }}
-            />
-        );
-        let index = data.length - 1;
-        const row = (rowData, sectionID, rowID) => {
-            if (index < 0) {
-                index = data.length - 1;
-            }
-            const obj = data[index--];
-            return (
-                <div key={rowID} style={{ padding: '0 15px' }}>
-                    <div
-                        style={{
-                            lineHeight: '50px',
-                            color: '#888',
-                            fontSize: 18,
-                            borderBottom: '1px solid #F6F6F6',
-                        }}
-                    >{obj.title}</div>
-                    <div style={{ display: 'flex', padding: '15px 0' }}>
-                        <img style={{ height: '64px', marginRight: '15px' }} src={obj.img} alt="" />
-                        <div style={{ lineHeight: 1 }}>
-                            <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{obj.des}</div>
-                            <div><span style={{ fontSize: '30px', color: '#FF6E27' }}>35</span>¥ {rowID}</div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
+    renderContent = (tab, index) =>{
+        const { Content }= tab;
 
         return (
-            <ListView
-                ref={el => this.lv = el}
-                dataSource={this.state.dataSource}
-                renderHeader={() => <span>header</span>}
-                renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-                    {this.state.isLoading ? 'Loading...' : 'Loaded'}
-                </div>)}
-                renderSectionHeader={sectionData => (
-                    <div>{`Task ${sectionData.split(' ')[1]}`}</div>
-                )}
-                renderRow={row}
-                renderSeparator={separator}
-                style={{
-                    height: this.state.height,
-                    overflow: 'auto',
-                }}
-                pageSize={4}
-                onScroll={() => { console.log('scroll'); }}
-                scrollRenderAheadDistance={500}
-                onEndReached={this.onEndReached}
-                onEndReachedThreshold={10}
-            />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '200px', backgroundColor: '#fff' }}>
+                <Content />
+            </div>
+        );
+    };
+
+    handleTabClick = (tab, index) => {
+        this.setState({currentPage: index});
+    };
+
+    render() {
+        const { currentPage, containerHeight } = this.state;
+
+        return (
+            <div style={{height: containerHeight}}>
+                <WhiteSpace />
+                <Tabs
+                    tabs={tabs}
+                    page={currentPage}
+                    destroyInactiveTab={true}
+                    renderTabBar={props => <Tabs.DefaultTabBar
+                        {...props}
+                        page={3}
+                        onTabClick={this.handleTabClick}
+                    />}
+                >
+                    {this.renderContent}
+                </Tabs>
+                <WhiteSpace />
+            </div>
         );
     }
 }
 
-const mainLayoutProps = {
-    items: [
-        {
-            title: "Life",
-            value: "Life",
-            icon: "https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg",
-            selectedIcon: "https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg",
-            badge: "",
-            dot: false,
-            onPress: () => {},
-            component: () => <div>1111</div>
-        },
-        {
-            title: "Koubei",
-            value: "Koubei",
-            icon: "https://zos.alipayobjects.com/rmsportal/BTSsmHkPsQSPTktcXyTV.svg",
-            selectedIcon: "https://zos.alipayobjects.com/rmsportal/ekLecvKBnRazVLXbWOnE.svg",
-            badge: "new",
-            dot: false,
-            onPress: () => {},
-            component: () => <div>2222</div>
-        },
-        {
-            title: "Friend",
-            value: "Friend",
-            icon: "https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg",
-            selectedIcon: "https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg",
-            badge: "new",
-            dot: false,
-            onPress: () => {},
-            component: () => <div>3333</div>
-        },
-        {
-            title: "My",
-            value: "My",
-            icon: "https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg",
-            selectedIcon: "https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg",
-            badge: "new",
-            dot: false,
-            onPress: () => {},
-            component: () => <div>4444</div>
-        },
-    ],
-}
-
-class TabBarExample extends React.Component {
-
-    render() {
-
-        return <MainLayout {...mainLayoutProps}/>
-    }
-}

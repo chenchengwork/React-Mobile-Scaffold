@@ -6,9 +6,15 @@ const to = (route) =>  EnumEnv.rootPath + route;
  */
 const EnumRouter = {
     rootRoute: to(''),		    // 根路由
-
     login: to('login'),		    // 登录
-    index: to('index'),		        // 首页
+
+    /*
+     |-----------------------------------------------------------
+     | 业务路由
+     |-----------------------------------------------------------
+     */
+    index: to('index'),
+    index1: to('index1'),
 };
 
 export default EnumRouter;

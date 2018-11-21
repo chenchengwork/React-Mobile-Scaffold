@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter,Route,Switch,Redirect,Link } from 'react-router-dom';
 import loadable from 'utils/loadable';
 
-// import MainLayout from 'layouts/MainLayout';
+import MainLayout from 'layouts/MainLayout';
 const Exception = loadable(import("components/Exception"));
 const ErrorBoundary = loadable(import("components/ErrorBoundary"));
 
@@ -17,10 +17,9 @@ const lazy = (uri, component, isMainLayout, store, props ) => {
     const LazyComponent = loadable(component);
     props = {store, ...props};
     if(!props.store) delete props.store;
-    // const Layout = isMainLayout ? MainLayout : Fragment;
-    const Layout = Fragment;
+    const Layout = isMainLayout ? MainLayout : Fragment;
 
-    return () => <Layout><LazyComponent {...props} /></Layout>
+    return () => <Layout currentUri={uri}><LazyComponent {...props} /></Layout>
 };
 
 /**
@@ -53,7 +52,6 @@ const transformRouter = (routes) => () => (
             <Switch>
                 <Route exact path={EnumRouter.rootRoute} render={() => checkLoginRedirect()} />
                 <Route exact path="/" render={() => checkLoginRedirect()}  />
-
                 {
                     routes.map((item, index) => {
                         // exact关键字表示对path进行完全匹配
