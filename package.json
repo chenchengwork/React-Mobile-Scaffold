@@ -26,15 +26,15 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "webpack-pipe": "^1.0.3"
+    "webpack-pipe": "^1.0.5"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web.git"
+    "url": "git+https://github.com/chenchengwork/React-Mobile-Scaffold.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web/issues"
+    "url": "https://github.com/chenchengwork/React-Mobile-Scaffold/issues"
   },
-  "homepage": "https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web#readme"
+  "homepage": "https://github.com/chenchengwork/React-Mobile-Scaffold#readme"
 }

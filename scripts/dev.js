@@ -8,8 +8,8 @@ const webpackConfig = mkWebpackConfig([pipe.development]);
 doDev({
 	webpackConfig,
     devServerConfig: {},
-	// host: "localhost",
-	host: "10.0.5.144",
+	host: "localhost",
+	// host: "10.0.5.189",
 	port: 8001
 });
 
