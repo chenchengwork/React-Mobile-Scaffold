@@ -26,7 +26,7 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "webpack-pipe": "^1.0.5"
+    "webpack-pipe": "^1.0.9"
   },
   "repository": {
     "type": "git",
